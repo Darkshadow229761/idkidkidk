@@ -1,23 +1,22 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
-
-const genmbDataJson = {
-  name: 'genmb-data-json',
-  transform(code, id) {
-    if (!/\.geojson(?:$|\?)/.test(id)) return null;
-    if (/[?&](?:raw|url|worker|sharedworker)\b/.test(id)) return null;
-    return { code: `export default JSON.parse(${JSON.stringify(code)})`, map: null };
-  },
-};
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig({
-  plugins: [genmbDataJson, react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+
   resolve: {
-    alias: { '@': new URL('./src', import.meta.url).pathname },
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
   },
+
   build: {
-    outDir: 'dist',
+    outDir: "dist",
     minify: true,
   },
 });
