@@ -2,10 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import { initializePWA } from './lib/pwa';
-import './styles/main.css';
-import AppErrorBoundary from './components/AppErrorBoundary'
+import './style/main.css';
+import AppErrorBoundary from './components/AppErrorBoundary';
 
-initializePWA()
+initializePWA();
 
 createRoot(document.getElementById('root')!).render(
   <AppErrorBoundary>
